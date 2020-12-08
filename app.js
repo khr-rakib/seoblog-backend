@@ -1,5 +1,5 @@
 const express = require('express');
-const morgan =  require('morgan');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -15,8 +15,8 @@ const app = express();
 
 
 // DB
-mongoose.connect(process.env.DATABASE_URL_LOCAL, {useNewUrlParser: true, useUnifiedTopology: true})
-        .then(() => console.log('database connected'));
+mongoose.connect(process.env.DATABASE_URL_LOCAL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+    .then(() => console.log('database connected'));
 
 
 // middleware 
@@ -24,8 +24,8 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 // cors
-if(process.env.NODE_ENV === "development"){
-    app.use(cors({origin: `${process.env.CLIENT_URL}`}));
+if (process.env.NODE_ENV === "development") {
+    app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
 }
 
 
